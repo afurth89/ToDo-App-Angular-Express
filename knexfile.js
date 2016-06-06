@@ -2,9 +2,8 @@ module.exports = {
 
 development: {
   client: 'pg',
-  connection: {
-    database: 'express'
-  }
+  connection: 'postgres://localhost/todo_app_angular_express',
+  degug: true
 },
 
 staging: {
