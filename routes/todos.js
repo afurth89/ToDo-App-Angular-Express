@@ -12,7 +12,18 @@ router.route('/')
     // res.send("hello")
   // })
   .post((req, res) => {
-    res.send("hello")
+    knex('todos').insert(req.body.todo)
+      .returning('*')
+      .then(function(todo) {
+        res.format({
+          json: function() {
+            res.send({todo});
+          }
+        })
+      })
+      .catch(function(err) {
+        console.log("THE ERROR IS...", err)
+      })
   });
 
 module.exports = router;
