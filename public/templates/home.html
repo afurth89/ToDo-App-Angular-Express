@@ -1,1 +1,6 @@
 <h1>Hello World, Today is June {{3+3}}</h1>
+
+<div ng-repeat="todo in home.todos">
+  <h3>Todo #{{todo.id}}: {{todo.content}}</h3>
+  <p>Completed? {{todo.completed}}</p>
+</div>
