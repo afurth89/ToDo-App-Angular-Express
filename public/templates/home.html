@@ -3,9 +3,12 @@
 <form name="todoForm" ng-submit="home.submitTodo()">
   <input type="text" ng-model="home.newTodoText" placeholder="Enter a new todo">
 </form>
-
-<div ng-repeat="todo in home.todos">
-  <h3>Todo #{{todo.id}}: {{todo.content}}</h3>
-  <p>Completed? {{todo.completed}}</p>
+<br>
+<div ng-repeat="todo in home.todos | orderBy:'id'" style="margin-bottom: 15px">
+  <h3 style="margin:0 0;"><input type="checkbox" ng-model="todo.completed" ng-change="home.completedTodo(todo)"> <span ng-class="{strike: todo.completed}">Todo #{{todo.id}}: {{todo.content}}</span></h3>
+  <form name="editTodoForm" ng-submit="home.editTodo(todo)" ng-show="!todo.completed">
+    <input type="text" ng-model="todo.editTodoText" placeholder="Change your todo">
+  </form>
   <button ng-click="home.removeTodo(todo.id)">Delete Todo</button>
+  <br>
 </div>

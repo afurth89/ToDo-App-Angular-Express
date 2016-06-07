@@ -15,6 +15,19 @@ app.service("TodoService", function($http) {
       }
       return $http(req)
     },
+    updateTodo: function(todo) {
+      var req = {
+        method: 'PUT',
+        url: '/todos/'+todo.id,
+        data: {}
+      }
+      if (todo.editTodoText) {
+        req.data.todo = {content: todo.editTodoText, completed: todo.completed} 
+      } else {
+        req.data.todo = {content: todo.content, completed: todo.completed}
+      }
+      return $http(req)
+    },
     deleteTodo: function(TodoId) {
       var req = {
         method: 'DELETE',

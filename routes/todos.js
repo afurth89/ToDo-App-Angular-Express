@@ -54,12 +54,16 @@ router.route('/:id')
     knex('todos').where('id', +req.params.id)
       .update({content: req.body.todo.content, completed: req.body.todo.completed}) 
       .returning('*')
-      .then(function(todo) {
-        res.format({
-          json: function() {
-            res.send({todo});
-          }
-        })
+      .then(function() {
+        knex('todos').select()
+          .then((todos) => {
+            res.format({
+              json: function() {
+                res.send( {todos} )  // Uses object literal notation -> {todos: [{todo1}, {todo2}, etc]}
+                // res.send( todos )  // Just sends back an array of data -> [{todo1}, {todo2}, etc]
+              }
+            })
+          })
       })
       .catch(function(err) {
         console.log("The PATCH ERROR IS...", err)
