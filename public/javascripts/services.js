@@ -14,6 +14,13 @@ app.service("TodoService", function($http) {
         data: { todo: {content: TodoContent}}
       }
       return $http(req)
+    },
+    deleteTodo: function(TodoId) {
+      var req = {
+        method: 'DELETE',
+        url: '/todos/'+TodoId
+      }
+      return $http(req)
     }
   }
 })

@@ -10,13 +10,16 @@ function homeController(TodoService) {
 
   vm.submitTodo = function() {
     TodoService.createTodo(vm.newTodoText).then(function(todos) {
-      // What do I do to rerender the list of todos after a new
-      // one is submitted
+      // Reset the todos list
       vm.todos = todos.data.todos;
+      // Clear the new Todo form
       vm.newTodoText = "";
     })
   }
-  // vm.deleteTodo = function(id) {
-  //   TodoService.deleteTodo(id)
-  // }
+  vm.removeTodo = function(id) {
+    TodoService.deleteTodo(id).then(function(todos) {
+      // Reset the todos list
+      vm.todos = todos.data.todos;
+    })
+  }
 }
